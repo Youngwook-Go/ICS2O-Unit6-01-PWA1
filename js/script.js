@@ -21,12 +21,21 @@ if (navigator.serviceWorker) {
 
 function submit() {
   // input
-  const base = parseInt(document.getElementById("base-value").value)
-  const height = parseInt(document.getElementById("height-value").value)
+  const numberOfHours = parseFloat(
+    document.getElementById("worked-hours").value
+  )
+  const hourlyRate = parseFloat(document.getElementById("hourly-rate").value)
+  const TAX_RATE = 0.18
 
   // process
-  const area = (base * height) / 2
+  const governmentTake = numberOfHours * hourlyRate * TAX_RATE
+  const homePay = numberOfHours * hourlyRate - governmentTake
 
   // output
-  document.getElementById("area").innerHTML = " The area is : " + area + " ㎠ "
+  document.getElementById(
+    "homePay"
+  ).innerHTML = `Your pay will be: $ ${homePay.toFixed(2)}`
+  document.getElementById(
+    "governmentTake"
+  ).innerHTML = `Your government took: $ ${governmentTake.toFixed(2)}`
 }
